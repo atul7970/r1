@@ -1,7 +1,7 @@
 const express = require("express");
 const homeSchema = require("../models/homeSchema");
 const Router = express.Router();
-
+const request = require("request");
 const axios = require("axios");
 const SECRET_KEY = process.env.SK;
 Router.get("/", async (req, res) => {
