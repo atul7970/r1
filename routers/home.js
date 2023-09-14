@@ -3,7 +3,7 @@ const homeSchema = require("../models/homeSchema");
 const Router = express.Router();
 
 const axios = require("axios");
-
+const SECRET_KEY = process.env.SK;
 Router.get("/", async (req, res) => {
   try {
     return res.status(200).send("Welcome to Home Screen");

@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
   res.status(200).send("Welcome to Home Screen");
 });
 mongoose
-  .connect("mongodb+srv://atul:atul123@cluster0.bzldyvv.mongodb.net/", {
+  .connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
