@@ -62,7 +62,7 @@ const userSchema = mongoose.Schema({
     type: String,
     enum: ["Hosteller", "Dayscholar"],
   },
-  captcha: {
+  reCaptchaValue: {
     type: String,
   },
 

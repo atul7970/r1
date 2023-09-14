@@ -13,9 +13,9 @@ Router.get("/", async (req, res) => {
 });
 const token = (req, res, next) => {
   if (
-    req.body.captcha === undefined ||
-    req.body.captcha === "" ||
-    req.body.captcha === null
+    req.body.reCaptchaValue === undefined ||
+    req.body.reCaptchaValue === "" ||
+    req.body.reCaptchaValue === null
   ) {
     return res.json({ success: false, msg: "Please select captcha" });
   }
