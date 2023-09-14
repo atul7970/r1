@@ -12,31 +12,24 @@ Router.get("/", async (req, res) => {
   }
 });
 const token = (req, res, next) => {
-  try {
-    const { ReCaptchaValue } = req.body;
-
-    const url = `https://www.google.com/recaptcha/api/siteverify?secret=${SECRET_KEY}&response=${ReCaptchaValue}`;
-
-    axios({
-      url: url,
-      method: "POST",
-    })
-      .then(({ data }) => {
-        console.log(data);
-
-        if (data.success) {
-          res.status(200).json({ message: "Recaptcha Verified" });
-        } else {
-          res.status(400).json({ message: "Recaptcha verification failed" });
-        }
-      })
-      .catch((e) => {
-        res.status(400).json({ message: "Invalid Recaptcha" });
-      });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+  if (
+    req.body.captcha === undefined ||
+    req.body.captcha === "" ||
+    req.body.captcha === null
+  ) {
+    return res.json({ success: false, msg: "Please select captcha" });
   }
+  const secretkey = process.env.SK;
+  const verifyurl =
+    "https://google.com/recaptcha/api/siteverify?secret=${secretkey}&response=${req.body.captcha}&remoteip=${req.connection.remoteAddress}";
+  request(verifyurl, (err, response, body) => {
+    body = JSON.parse(body);
+
+    if (body.success !== undefined && !body.success) {
+      return res.json({ success: false, msg: "Failed captcha verification" });
+    }
+    return res.json({ success: true, msg: "Captcha passed" });
+  });
 };
 
 Router.post("/register", token, async (req, res) => {
