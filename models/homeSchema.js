@@ -62,9 +62,10 @@ const userSchema = mongoose.Schema({
     type: String,
     enum: ["Hosteller", "Dayscholar"],
   },
-  //   ReCaptchaValue: {
-  //     type: String,
-  //   },
+  captcha: {
+    type: String,
+  },
+
 });
 
 const UserModel = mongoose.model("user", userSchema);
