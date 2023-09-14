@@ -32,12 +32,12 @@ app.listen(PORT, () => {
   console.log(`Listening to the PORT ${PORT}`);
 });
 
-const limiter = rateLimit({
-  windowMs: 5 * 60 * 1000,
-  max: 50,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: "You can't make any more requests at the moment. Try again later",
-});
-app.use(limiter);
+// const limiter = rateLimit({
+//   windowMs: 5 * 60 * 1000,
+//   max: 50,
+//   standardHeaders: true,
+//   legacyHeaders: false,
+//   message: "You can't make any more requests at the moment. Try again later",
+// });
+// app.use(limiter);
 app.use("/api", home);
